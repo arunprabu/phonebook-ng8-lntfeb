@@ -8,5 +8,6 @@ if (environment.production) {
   enableProdMode();
 }
 
+// step2:  ng app should bootstrapped with a module -- AppModule
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));
