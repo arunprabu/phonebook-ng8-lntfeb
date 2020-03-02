@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { CebComponent } from './ceb/ceb.component';
 
 @Component({
@@ -12,7 +12,7 @@ import { CebComponent } from './ceb/ceb.component';
     `
   ]
 })
-export class ConceptsComponent implements OnInit {
+export class ConceptsComponent implements OnInit, AfterViewInit {
 
   // string interpolation related
   appName = 'Phone Book!';
@@ -35,12 +35,16 @@ export class ConceptsComponent implements OnInit {
   dataReceivedFromChildComp: string;
 
   // Parent can access data from Child using @ViewChild()
-  @ViewChild(CebComponent, { static: true}) cebData;
+  @ViewChild(CebComponent, { static: false }) cebData;
   // todo: @ViewChildren()
 
   constructor() { }
 
   ngOnInit() {
+    console.log(this.cebData);
+  }
+
+  ngAfterViewInit() {
     console.log(this.cebData);
   }
 

@@ -26,7 +26,7 @@ export class CebComponent implements OnInit {
 
   loadProfileHandler() {
     // step 2: emit the event
-    this.profileLoaded.emit('Arun'); // passing data from child comp 
+    this.profileLoaded.emit('Arun'); // passing data from child comp
     // sTep3: ref- concepts.comp.html -- for event handler
   }
 

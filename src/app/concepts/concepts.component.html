@@ -83,6 +83,42 @@
     <div class="tab-pane fade" id="directives-tab" role="tabpanel"
       aria-labelledby="directives-tab">
       <h2>Directives</h2>
+      <pre>
+        Directives
+        ---
+          Special Instructions for the DOM 
+
+        1. Attribute Directives 
+            routerLink, ngClass, ngStyle, routerLinkActive, routerLinkActiveOptions
+        2. Structural Directives
+            Impacts the Structural layer of the page. 
+            *ngIf, *ngFor, ngSwitch 
+      </pre>
+
+      <h4>*ngIf</h4>
+
+      <div class="alert alert-success" *ngIf="isLoggedIn; else NotAuthBox">
+        Wow! You are authenticated to access premium features.
+      </div>
+
+      <!-- Template Ref -->
+      <ng-template #NotAuthBox>
+        <div class="alert alert-danger">
+        Pls login to access premium features.
+        </div>
+      </ng-template>
+      
+      <hr>
+      <h4>*ngFor</h4>
+      <ul>
+        <li *ngFor="let skill of skillsList; index as i">{{i+1}}. {{skill}}</li>
+      </ul>
+      <!-- Todo: find index in the above *ngFor -->
+
+      <!-- Todo: ngSwitch -->
+      
+
+
     </div>
 
   </div>
