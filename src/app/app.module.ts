@@ -10,13 +10,16 @@ import { FooterComponent } from './shared/components/footer/footer.component';
 import { MenuComponent } from './shared/components/menu/menu.component';
 import { HomeComponent } from './home/home.component';
 import { ConceptsComponent } from './concepts/concepts.component';
-import { ContactsComponent } from './contacts/components/contacts.component';
 import { AboutComponent } from './about/about.component';
 import { CpbComponent } from './concepts/cpb/cpb.component';
 import { CebComponent } from './concepts/ceb/ceb.component';
 import { ColorizerDirective } from './shared/directives/colorizer.directive';
-import { AddContactComponent } from './contacts/components/add-contact/add-contact.component';
-import { ContactDetailsComponent } from './contacts/components/contact-details/contact-details.component';
+import { ContactsModule } from './contacts/contacts.module';
+import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
+import { ProductsListComponent } from './products/components/products-list/products-list.component';
+import { CartComponent } from './products/components/cart/cart.component';
+import { ProductDetailsComponent } from './products/components/product-details/product-details.component';
+import { ProductsModule } from './products/products.module';
 
 
 // Main switching box
@@ -28,19 +31,18 @@ import { ContactDetailsComponent } from './contacts/components/contact-details/c
     MenuComponent,
     HomeComponent,
     ConceptsComponent,
-    ContactsComponent,
     AboutComponent,
     CpbComponent,
     CebComponent,
     ColorizerDirective,
-    AddContactComponent,
-    ContactDetailsComponent
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,  // for ngModel
-    ReactiveFormsModule,  // for reactive forms
     HttpClientModule, // for http calls
+    ContactsModule,
+    ProductsModule,
     AppRoutingModule
   ],
   providers: [],

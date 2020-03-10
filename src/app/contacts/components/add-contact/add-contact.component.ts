@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ContactService } from '../../services/contact.service';
+import { Contact } from '../../models/contact';
 
 @Component({
   selector: 'app-add-contact',
@@ -33,7 +34,7 @@ export class AddContactComponent implements OnInit {
       // 1.1. connect to service using dep inj
       // 1.2. pass the data to createContact method
     // async
-    const status: any = await this.contactService.createContact(this.contactForm.value);
+    const status: Contact = await this.contactService.createContact(this.contactForm.value);
     console.log(status); // 2. get the resp from
 
     if (status && status.id ) {

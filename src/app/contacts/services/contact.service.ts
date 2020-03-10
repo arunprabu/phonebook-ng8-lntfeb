@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { map, catchError, retry } from 'rxjs/operators';
+import { Contact } from '../models/contact';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContactService {
 
-  REST_API_URL = 'http://jsonplaceholder.typicode.com/users';
+  private REST_API_URL = 'http://jsonplaceholder.typicode.com/users';
 
   constructor( private http: HttpClient ) { }
 
-  createContact( contactData ) { // 1. get the data from component
+  createContact( contactData ): Promise<Contact>  { // 1. get the data from component
     console.log(contactData);
 
     // 2. send the same data to rest api using post method
@@ -20,7 +22,7 @@ export class ContactService {
     const addContactPromise = new Promise( (resolve, reject ) => {
       this.http.post(this.REST_API_URL, contactData)
         .toPromise() // converting the call to promise
-        .then( ( res: any) => { // 3. get the resp from rest api
+        .then( ( res: Contact ) => { // 3. get the resp from rest api
           console.log(res);
           resolve(res);
         })
@@ -32,14 +34,34 @@ export class ContactService {
           console.log( 'Its all over');
         });
     });
-    return addContactPromise;
+    return addContactPromise as Promise<Contact>;
   }
 
-  getContacts() {
+  getContacts(): Observable<Contact[]> {
     return this.http.get(this.REST_API_URL)
-      .pipe( map( (res: any) => {
+      .pipe( map( (res: Contact[]) => {
+        console.log(res);
+        // sort, filter, convert to json
+        return res;
+      }));
+  }
+
+  getContactById( contactId ): Observable<Contact> {
+    console.log(contactId);
+    return this.http.get(this.REST_API_URL + '/' + contactId)
+      .pipe( map( (res: Contact) => {
         console.log(res);
         return res;
       }));
   }
+
+  updateContact( contactData): Observable<Contact> {
+    return this.http.put(this.REST_API_URL + '/' + contactData.id, contactData)
+      .pipe( map( (res: Contact) => {
+        console.log(res);
+        return res;
+      }));
+  }
+
+  // todo: Delete contact
 }
