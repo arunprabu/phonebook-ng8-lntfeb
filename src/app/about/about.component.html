@@ -1,1 +1,23 @@
-<p>about works!</p>
+<div class="container">
+  <h1>Pipes</h1>
+  <p>{{today}}</p>
+  <p>{{today | date }}</p>
+  <p>{{today | date: 'MMM/dd/yyyy hh:mm:ss a' }}</p>
+  <p>{{today | date: 'dd, MMMM yyyy hh:mm:ss a' }}</p>
+
+  <p>{{ dymmyText }}</p>
+  <p>{{ dymmyText | uppercase }}</p>
+  <p>{{ dymmyText | lowercase }}</p>
+
+  <p>{{ myProfile }}</p>
+  <p>{{ myProfile | json }}</p>
+  
+  <p>Custom Pipe - Ellipsis</p>
+  <p>{{ loremIpsum }}</p>
+  <hr>
+  <p>{{ loremIpsum | ellipsis }}</p>
+  <p>{{ loremIpsum | ellipsis: '24' }}</p>
+  <p>{{ loremIpsum | ellipsis: '48' }}</p>
+  <p>{{ loremIpsum | ellipsis: '120' }}</p>
+  
+</div>

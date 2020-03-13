@@ -1,7 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
+
+// firebase setup
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,11 +22,22 @@ import { CebComponent } from './concepts/ceb/ceb.component';
 import { ColorizerDirective } from './shared/directives/colorizer.directive';
 import { ContactsModule } from './contacts/contacts.module';
 import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
-import { ProductsListComponent } from './products/components/products-list/products-list.component';
-import { CartComponent } from './products/components/cart/cart.component';
-import { ProductDetailsComponent } from './products/components/product-details/product-details.component';
 import { ProductsModule } from './products/products.module';
+import { LoginComponent } from './auth/components/login/login.component';
+import { SignupComponent } from './auth/components/signup/signup.component';
+import { AuthInterceptor } from './shared/interceptors/auth-interceptor';
+import { EllipsisPipe } from './shared/pipes/ellipsis.pipe';
 
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: 'AIzaSyDI7mYVzSBR_xSdoPtkDq_D4E1_4pzmLno', // this key will not work after a few days
+  authDomain: 'hexa-ng-auth-b2.firebaseapp.com',
+  databaseURL: 'https://hexa-ng-auth-b2.firebaseio.com',
+  projectId: 'hexa-ng-auth-b2',
+  storageBucket: '',
+  messagingSenderId: '333443086726',
+  appId: '1:333443086726:web:a30008031375ca88c05407'
+};
 
 // Main switching box
 @NgModule({
@@ -35,7 +52,10 @@ import { ProductsModule } from './products/products.module';
     CpbComponent,
     CebComponent,
     ColorizerDirective,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    LoginComponent,
+    SignupComponent,
+    EllipsisPipe
   ],
   imports: [
     BrowserModule,
@@ -43,9 +63,16 @@ import { ProductsModule } from './products/products.module';
     HttpClientModule, // for http calls
     ContactsModule,
     ProductsModule,
-    AppRoutingModule
+    AppRoutingModule,
+
+    AngularFireModule.initializeApp(firebaseConfig),   // will help us connect to firebase app 
+    AngularFireAuthModule, // login
+    AngularFirestoreModule, // signup
+
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ], // intercept the http calls
   bootstrap: [AppComponent]
   // step 3: AppModule should bootstrap a comp -- AppComponent
 })

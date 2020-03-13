@@ -4,13 +4,14 @@ import { Routes, RouterModule } from '@angular/router';
 import { ContactsComponent } from './components/contacts.component';
 import { AddContactComponent } from './components/add-contact/add-contact.component';
 import { ContactDetailsComponent } from './components/contact-details/contact-details.component';
+import { AuthGuard } from '../shared/guards/auth.guard';
 
 // configuring child routes
 const routes: Routes = [
   {
     path: 'contacts', children: [
       { path: '', component: ContactsComponent },
-      { path: 'new', component: AddContactComponent },
+      { path: 'new', component: AddContactComponent, canActivate: [ AuthGuard ] },
       { path: ':contactId', component: ContactDetailsComponent }
     ]
   }

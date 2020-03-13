@@ -4,12 +4,16 @@ import { HomeComponent } from './home/home.component';
 import { ConceptsComponent } from './concepts/concepts.component';
 import { AboutComponent } from './about/about.component';
 import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
+import { LoginComponent } from './auth/components/login/login.component';
+import { SignupComponent } from './auth/components/signup/signup.component';
 
 // config the routes
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'concepts', component: ConceptsComponent},
   { path: 'about', component: AboutComponent},
+  { path: 'login', component: LoginComponent },
+  { path: 'signup', component: SignupComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 
